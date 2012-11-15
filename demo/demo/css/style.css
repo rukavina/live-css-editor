@@ -1,0 +1,15 @@
+body{
+    background-color: #a9dba9;
+    color: #faf2cc;
+    font-family: arial;
+    font-size: 14px;
+}
+
+h1{
+    color: #faf2cc;
+}
+
+p, span{
+    font-size: 12px;
+    border-color: #000;
+}
