@@ -1,23 +1,7 @@
 /**
- * jQuery Live CSS Editor
+ * jQuery Live CSS Editor (LCE)
  * 
-var pages = {
-    'demo/index.html': {
-        name: 'Demo page',
-        def: {
-            'h1':{
-                name: 'Heading',
-                props:['color','background-image']
-                //,editors:{}
-                //,values:{}
-            },
-            'p,span':{
-                name: 'Text',
-                props:['font-size']
-            }            
-        }
-    }
-}
+ * @author Milan Rukavina 2012
  */
 
 (function($)
