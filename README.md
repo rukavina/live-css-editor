@@ -96,6 +96,7 @@ Fortunately, there's an easy way to develop your own editors and attach to LCE. 
 
 * Create new .js file
 * write there something like:
+
 ```javascript
 (function(){
     //color
@@ -113,6 +114,7 @@ Fortunately, there's an easy way to develop your own editors and attach to LCE. 
 ```
 
 Basically, you just call *$.fn.livecsseditor.setPropertyEditor* and provide callback which renders your property editor. *options* is an object:
+
 ```javascript
 {
     'container':valueContainer,//div container
