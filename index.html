@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Live-css-editor by rukavina</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Live-css-editor</h1>
+        <p>jquery online css editor, themeroller like tool for customizing your web page</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/rukavina/live-css-editor" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/rukavina/live-css-editor/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/rukavina/live-css-editor/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>Live CSS Editor</h1>
+
+<h2>Overview</h2>
+
+<p>Live CSS Editor (LCE) is jquery plugin, "themeroller like" tool for customizing your web page design. Basically, you provide json with configuration and LCE shows: live preview and CSS editor with ability to edit properties you defined. So you can control which properties can be customized.</p>
+
+<h2>Demo</h2>
+
+<p><a href="http://rukavina.github.com/live-css-editor">http://rukavina.github.com/live-css-editor</a></p>
+
+<h2>Installation and setup</h2>
+
+<p>You have to include this dependencies in your page (head):</p>
+
+<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/jquery-1.7.1.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/microtpl.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="c">&lt;!-- lce itself --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/jquery.livecsseditor.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">href=</span><span class="s">"css/livecsseditor.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/lce.editors.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="c">&lt;!-- colorpicker --&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">media=</span><span class="s">"screen"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">href=</span><span class="s">"plugins/colorpicker/css/colorpicker-bootstrap.css"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"plugins/colorpicker/js/colorpicker-bootstrap.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="c">&lt;!-- twitter bootstrap --&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">href=</span><span class="s">"plugins/bootstrap/css/bootstrap.min.css"</span>  <span class="na">media=</span><span class="s">"screen"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"plugins/bootstrap/js/bootstrap.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+
+<p>In the page's body provide div where editor will be placed - give it enough space. Note: there cannot be 2 LCEs on a single page.</p>
+
+<div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"lce"</span><span class="nt">&gt;&lt;/div&gt;</span> 
+</pre></div>
+
+<p>Init LCE when document is ready, ex.</p>
+
+<div class="highlight"><pre>    <span class="nx">$</span><span class="p">(</span><span class="s1">'#lce'</span><span class="p">).</span><span class="nx">livecsseditor</span><span class="p">({</span>
+        <span class="nx">pages</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s1">'demo/index.html'</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">name</span><span class="o">:</span> <span class="s1">'Demo page'</span><span class="p">,</span>
+                <span class="nx">def</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="s1">'h1'</span><span class="o">:</span><span class="p">{</span>
+                        <span class="nx">name</span><span class="o">:</span> <span class="s1">'Heading'</span><span class="p">,</span>
+                        <span class="nx">props</span><span class="o">:</span><span class="p">[</span><span class="s1">'color'</span><span class="p">,</span><span class="s1">'background-color'</span><span class="p">]</span>
+                    <span class="p">},</span>
+                    <span class="s1">'p,span'</span><span class="o">:</span><span class="p">{</span>
+                        <span class="nx">name</span><span class="o">:</span> <span class="s1">'Text'</span><span class="p">,</span>
+                        <span class="nx">props</span><span class="o">:</span><span class="p">[</span><span class="s1">'font-size'</span><span class="p">,</span><span class="s1">'color'</span><span class="p">]</span>
+                    <span class="p">}</span>            
+                <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s1">'demo/second.html'</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">name</span><span class="o">:</span> <span class="s1">'Second page'</span><span class="p">,</span>
+                <span class="nx">def</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="s1">'h2'</span><span class="o">:</span><span class="p">{</span>
+                        <span class="nx">name</span><span class="o">:</span> <span class="s1">'Heading 2'</span><span class="p">,</span>
+                        <span class="nx">props</span><span class="o">:</span><span class="p">[</span><span class="s1">'color'</span><span class="p">]</span>
+                    <span class="p">},</span>
+                    <span class="s1">'em'</span><span class="o">:</span><span class="p">{</span>
+                        <span class="nx">name</span><span class="o">:</span> <span class="s1">'Text'</span><span class="p">,</span>
+                        <span class="nx">props</span><span class="o">:</span><span class="p">[</span><span class="s1">'font-size'</span><span class="p">]</span>
+                    <span class="p">}</span>            
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+</pre></div>
+
+<p>Options json has a list of pages with urls to be customized and json definition of selector/properties which can be altered in LCE.</p>
+
+<p>After customization is done, you would like to grab CSS:</p>
+
+<div class="highlight"><pre>  <span class="nx">$</span><span class="p">(</span><span class="s1">'#lce'</span><span class="p">).</span><span class="nx">livecsseditor</span><span class="p">(</span><span class="s1">'getCss'</span><span class="p">,{</span><span class="nx">pagePath</span><span class="o">:</span><span class="s1">'demo/index.html'</span><span class="p">})</span>
+</pre></div>
+
+<p>This will return css for just a page with provided path...but you could do</p>
+
+<div class="highlight"><pre>  <span class="nx">$</span><span class="p">(</span><span class="s1">'#lce'</span><span class="p">).</span><span class="nx">livecsseditor</span><span class="p">(</span><span class="s1">'getCss'</span><span class="p">);</span>
+</pre></div>
+
+<p>and get single CSS string for all pages.</p>
+
+<h2>Use Case</h2>
+
+<p>Possible use case could be backend of your website where you can provide admin ability to develop his own custom skin without CSS knowledge. In WYSIWYG fashion he will be able to customize look and feel by live previewing front-end pages during customization.
+Generated CSS could be stored in file/db and used by the frontend rendering engine to overwrite default css.</p>
+
+<h2>Custom property editors</h2>
+
+<p>At the moment LCE doesn't come with many specialized css property editors. Besides color picker for "color" and "background-color", there's only generic input field editor. It doesn't help you much if you are not familiar with CSS and possible values for each property.
+Fortunately, there's an easy way to develop your own editors and attach to LCE. Here's how specialized color editor is done :</p>
+
+<ul>
+<li>Create new .js file</li>
+<li>write there something like:</li>
+</ul><div class="highlight"><pre><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="c1">//color</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">livecsseditor</span><span class="p">.</span><span class="nx">setPropertyEditor</span><span class="p">([</span><span class="s1">'color'</span><span class="p">,</span><span class="s1">'background-color'</span><span class="p">],</span><span class="kd">function</span> <span class="nx">colorEditorCallback</span><span class="p">(</span><span class="nx">options</span><span class="p">){</span>
+        <span class="kd">var</span> <span class="nx">html</span> <span class="o">=</span> <span class="s1">'&lt;form class="form-inline"&gt;&lt;div class="input-append color" data-color="'</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">value</span> <span class="o">+</span> <span class="s1">'" data-color-format="rgb"&gt;&lt;input type="text" value="'</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">value</span> <span class="o">+</span> <span class="s1">'" /&gt;&lt;span class="add-on"&gt;&lt;i style="background-color: '</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">value</span> <span class="o">+</span> <span class="s1">'"&gt;&lt;/i&gt;&lt;/span&gt;&lt;/div&gt;&lt;a class="btn" href="#"&gt;&lt;i class=" icon-ok"&gt;&lt;/i&gt;&lt;/a&gt;&lt;/form&gt;'</span><span class="p">;</span>
+        <span class="nx">options</span><span class="p">.</span><span class="nx">container</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">html</span><span class="p">);</span>
+        <span class="nx">options</span><span class="p">.</span><span class="nx">container</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">'div.color'</span><span class="p">).</span><span class="nx">colorpicker</span><span class="p">();</span>
+        <span class="nx">options</span><span class="p">.</span><span class="nx">container</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">'a.btn'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">container</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">'input'</span><span class="p">).</span><span class="nx">val</span><span class="p">());</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span> 
+        <span class="p">});</span>        
+    <span class="p">});</span>  
+
+<span class="p">})();</span>
+</pre></div>
+
+<p>Basically, you just call <em>$.fn.livecsseditor.setPropertyEditor</em> and provide callback which renders your property editor. <em>options</em> is an object:</p>
+
+<div class="highlight"><pre><span class="p">{</span>
+    <span class="s1">'container'</span><span class="o">:</span><span class="nx">valueContainer</span><span class="p">,</span><span class="c1">//div container</span>
+    <span class="s1">'selector'</span><span class="o">:</span> <span class="nx">propSelector</span><span class="p">,</span><span class="c1">//css selector</span>
+    <span class="s1">'prop'</span><span class="o">:</span><span class="nx">prop</span><span class="p">,</span><span class="c1">//property name</span>
+    <span class="s1">'value'</span><span class="o">:</span><span class="nx">props</span><span class="p">[</span><span class="nx">propSelector</span><span class="p">].</span><span class="nx">values</span><span class="p">[</span><span class="nx">prop</span><span class="p">],</span><span class="c1">//current value</span>
+    <span class="s1">'setValue'</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">){</span><span class="c1">//set value callback</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<h2>Credits</h2>
+
+<p>This projects was inspired or uses the following projects:</p>
+
+<ul>
+<li><a href="http://jquery.com/">jquery</a></li>
+<li><a href="JavaScript%20Micro-Templating">JavaScript Micro-Templating</a></li>
+<li><a href="http://twitter.github.com/bootstrap/">twitter bootstrap</a></li>
+<li><a href="http://jqueryui.com/themeroller/">jquery themeroller</a></li>
+<li><a href="http://www.eyecon.ro/bootstrap-colorpicker">bootstrap colorpicker</a></li>
+</ul><h2>Licence</h2>
+
+<p>The MIT License (MIT)</p>
+
+<p>Copyright (c) 2012 Milan Rukavina</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/rukavina">rukavina</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
