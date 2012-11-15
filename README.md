@@ -6,7 +6,7 @@ Live CSS Editor (LCE) is jquery plugin, "themeroller like" tool for customizing 
 
 ## Demo
 
-http://rukavina.github.com/live-css-editor
+http://rukavina.github.com/live-css-editor/demo
 
 ## Installation and setup
 
