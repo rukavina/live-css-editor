@@ -93,7 +93,7 @@
         options.preview.contents().find(options.selector).data("hasPosEditor",true);              
         
         doc.posCallbacks[options.selector].listeners.push(function(event, ui){
-            var value = ui.position[options.prop];
+            var value = ui.position[options.prop] + 'px';
             options.container.find('input').val(value);
             options.setValue(value);
         });      
@@ -120,7 +120,7 @@
         options.preview.contents().find(options.selector).data("hasSizeEditor",true);              
         
         doc.sizeCallbacks[options.selector].listeners.push(function(event, ui){
-            var value = ui.size[options.prop];
+            var value = ui.size[options.prop] + 'px';
             options.container.find('input').val(value);
             options.setValue(value);
         });     
