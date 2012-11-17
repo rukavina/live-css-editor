@@ -87,8 +87,9 @@
      * Assign editor to a property
      *
      */
-    function assignEditor(props, propSelector, prop, valueContainer, editor){
+    function assignEditor(props, propSelector, prop, valueContainer, editor, selectorIndex, propertyIndex){
         props[propSelector].editors[prop] = editor({
+            'id':'editor-' + selectorIndex + '-' + propertyIndex,
             'container':valueContainer,
             'selector': propSelector,
             'prop':prop,
@@ -96,7 +97,9 @@
             'setValue':function(value){
                 props[propSelector].values[prop] = value;
                 preview.contents().find(propSelector).css(prop,value);
-            }
+            },
+            'preview':preview,
+            'previewId':'lcePreview'
         });        
     }
 
@@ -129,11 +132,22 @@
                         var query = '#properties-' + selectorIndex + ' li.prop-index-' + i + ' > div.lcePropValue';
                         var valueContainer = properties.find(query).first();
                         currEditor = (propEditors[prop])?propEditors[prop]:propEditors['default']; 
-                        assignEditor(props, propSelector, prop, valueContainer, currEditor);
+                        assignEditor(props, propSelector, prop, valueContainer, currEditor, selectorIndex, i);
                     }
+                    preview.contents().find(propSelector).data('selectorIndex',selectorIndex).click(function(){
+                        properties.find('.collapse').removeClass('in');
+                        properties.find('#properties-' + $(this).data('selectorIndex')).addClass('in');
+                    });
                     selectorIndex++;
                 }
-                properties.find('.collapse').collapse();
+                //mark selected selector
+                properties.find('.collapse').on('show', function () {
+                    var selected = preview.contents().find($(this).data('selector'));
+                    var selectedBgColor = selected.css('background-color');
+                    selected.animate({'background-color':'yellow'},500,function(){
+                        $(this).css('background-color',selectedBgColor);
+                    });
+                });
             });            
         })
     }    

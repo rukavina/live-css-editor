@@ -14,6 +14,9 @@
         <!-- twitter bootstrap -->
         <link rel="stylesheet" type="text/css" href="plugins/bootstrap/css/bootstrap.min.css"  media="screen">
         <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+        <!-- jquery ui -->
+        <link rel="stylesheet" type="text/css" href="plugins/jquery-ui-1.9.1/css/smoothness/jquery-ui-1.9.1.custom.min.css"  media="screen">
+        <script src="plugins/jquery-ui-1.9.1/js/jquery-ui-1.9.1.custom.min.js"></script>             
     </head>
     <body>
         <div class="page-header">
@@ -35,7 +38,15 @@
                                 'p,span':{
                                     name: 'Text',
                                     props:['font-size','color']
-                                }            
+                                },
+                                'div.drag':{
+                                    name:'Floating element',
+                                    props:['left','top']
+                                },
+                                'div.drag2':{
+                                    name:'Floating element 2',
+                                    props:['left','top','width','height']
+                                }                                
                             }
                         },
                         'demo/second.html': {
