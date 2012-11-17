@@ -91,8 +91,13 @@ Generated CSS could be stored in file/db and used by the frontend rendering engi
 
 ## Custom property editors
 
-At the moment LCE doesn't come with many specialized css property editors. Besides color picker for "color" and "background-color", there's only generic input field editor. It doesn't help you much if you are not familiar with CSS and possible values for each property.
-Fortunately, there's an easy way to develop your own editors and attach to LCE. Here's how specialized color editor is done :
+At the moment LCE comes with built in:
+* color picker for "color" and "background-color"
+* position ("left","top") draggable live feature for managing an element's position
+* size ("width","height") resizable live feature for managing an element's size
+* default, fallback generic editor for any other property
+
+Fortunately, there's an easy way to develop your own editors and attach it to LCE. Here's how specialized color editor is developed :
 
 * Create new .js file
 * write there something like:
