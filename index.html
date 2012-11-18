@@ -47,7 +47,7 @@
 
 <h2>Demo</h2>
 
-<p><a href="http://rukavina.github.com/live-css-editor">http://rukavina.github.com/live-css-editor</a></p>
+<p><a href="http://rukavina.github.com/live-css-editor/demo">http://rukavina.github.com/live-css-editor/demo</a></p>
 
 <h2>Installation and setup</h2>
 
@@ -65,6 +65,9 @@
 <span class="c">&lt;!-- twitter bootstrap --&gt;</span>
 <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">href=</span><span class="s">"plugins/bootstrap/css/bootstrap.min.css"</span>  <span class="na">media=</span><span class="s">"screen"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"plugins/bootstrap/js/bootstrap.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="c">&lt;!-- jquery ui --&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">href=</span><span class="s">"plugins/jquery-ui-1.9.1/css/smoothness/jquery-ui-1.9.1.custom.min.css"</span>  <span class="na">media=</span><span class="s">"screen"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"plugins/jquery-ui-1.9.1/js/jquery-ui-1.9.1.custom.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>             
 </pre></div>
 
 <p>In the page's body provide div where editor will be placed - give it enough space. Note: there cannot be 2 LCEs on a single page.</p>
@@ -127,8 +130,14 @@ Generated CSS could be stored in file/db and used by the frontend rendering engi
 
 <h2>Custom property editors</h2>
 
-<p>At the moment LCE doesn't come with many specialized css property editors. Besides color picker for "color" and "background-color", there's only generic input field editor. It doesn't help you much if you are not familiar with CSS and possible values for each property.
-Fortunately, there's an easy way to develop your own editors and attach to LCE. Here's how specialized color editor is done :</p>
+<p>At the moment LCE comes with built in:</p>
+
+<ul>
+<li>color picker for "color" and "background-color"</li>
+<li>position ("left","top") draggable live feature for managing an element's position</li>
+<li>size ("width","height") resizable live feature for managing an element's size</li>
+<li>default, fallback generic editor for any other property</li>
+</ul><p>Fortunately, there's an easy way to develop your own editors and attach it to LCE. Here's how specialized color editor is developed :</p>
 
 <ul>
 <li>Create new .js file</li>
