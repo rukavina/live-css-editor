@@ -1,0 +1,14 @@
+            <div class="row-fluid">
+                <div class="span8" style="min-height: 500px;">
+                    <iframe id="lcePreview" src="" style="width: 100%; height: 500px"></iframe>
+                </div>
+                <div id="lceInspector" class="span4">
+                    <select id="lcePages">
+                        <% for (var pagePath in pages){%>
+                        <option value="<%=pagePath%>"><%=pages[pagePath].name%></option>
+                        <% } %>                         
+                    </select>
+                    <div id="lceProperties">                    
+                    </div>                    
+                </div>
+            </div>

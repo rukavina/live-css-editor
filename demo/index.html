@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Live CSS Editor</title>       
+        <script src="js/jquery-1.7.1.min.js"></script>
+        <script src="js/microtpl.js"></script>
+        <!-- lce itself -->
+        <script src="js/jquery.livecsseditor.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/livecsseditor.css">
+        <script src="js/lce.editors.js"></script>
+        <!-- colorpicker -->
+        <link rel="stylesheet" media="screen" type="text/css" href="plugins/colorpicker/css/colorpicker-bootstrap.css"/>
+        <script type="text/javascript" src="plugins/colorpicker/js/colorpicker-bootstrap.js"></script>
+        <!-- twitter bootstrap -->
+        <link rel="stylesheet" type="text/css" href="plugins/bootstrap/css/bootstrap.min.css"  media="screen">
+        <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+        <!-- jquery ui -->
+        <link rel="stylesheet" type="text/css" href="plugins/jquery-ui-1.9.1/css/smoothness/jquery-ui-1.9.1.custom.min.css"  media="screen">
+        <script src="plugins/jquery-ui-1.9.1/js/jquery-ui-1.9.1.custom.min.js"></script>             
+    </head>
+    <body>
+        <div class="page-header">
+            <h1>Live CSS Editor <small>Customize your page design with live preview tool</small></h1>
+            <button class="btn" id="cssBtn">Get custom CSS</button>
+        </div>        
+        <div class="container-fluid" id="lce"></div>        
+        <script>
+            $(document).ready(function(){
+                $('#lce').livecsseditor({
+                    pages: {
+                        'demo/index.html': {
+                            name: 'Demo page',
+                            def: {
+                                'h1':{
+                                    name: 'Heading',
+                                    props:['color','background-color']
+                                },
+                                'p,span':{
+                                    name: 'Text',
+                                    props:['font-size','color']
+                                },
+                                'div.drag':{
+                                    name:'Floating element',
+                                    props:['left','top']
+                                },
+                                'div.drag2':{
+                                    name:'Floating element 2',
+                                    props:['left','top','width','height']
+                                }                                
+                            }
+                        },
+                        'demo/second.html': {
+                            name: 'Second page',
+                            def: {
+                                'h2':{
+                                    name: 'Heading 2',
+                                    props:['color']
+                                },
+                                'em':{
+                                    name: 'Text',
+                                    props:['font-size']
+                                }            
+                            }
+                        }
+                    }
+                });
+                //css button
+                $('#cssBtn').click(function(){
+                    alert($('#lce').livecsseditor('getCss',{pagePath:'demo/index.html'}));
+                });
+            });
+        </script>
+    </body>
+</html>

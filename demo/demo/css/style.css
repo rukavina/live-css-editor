@@ -1,0 +1,45 @@
+body{
+    background-color: #a9dba9;
+    color: #faf2cc;
+    font-family: arial;
+    font-size: 14px;
+}
+
+#wraper{
+    width: 500px;
+    margin: auto;
+    min-height: 500px;
+}
+
+h1{
+    color: #faf2cc;
+}
+
+p, span{
+    font-size: 12px;
+    border-color: #000;
+}
+
+div.drag{
+    position: absolute;
+    z-index: 10;
+    left: 100px;
+    top: 100px;
+    border: 1px solid black;
+    width: 300px;
+    height: 200px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+div.drag2{
+    position: absolute;
+    z-index: 10;
+    left: 200px;
+    top: 200px;
+    border: 1px solid red;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    vertical-align: middle;
+}

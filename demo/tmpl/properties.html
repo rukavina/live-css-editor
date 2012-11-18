@@ -1,0 +1,27 @@
+<div id="propAccordion">
+<% 
+var selectorIndex = 0;
+for (var selector in properties){    
+    var props = properties[selector].props;
+%>
+    <div class="accordion-group <%='selector-index-' + selectorIndex%>">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-selector="<%=selector%>" data-toggle="collapse" data-parent="#propAccordion" data-target="#<%='properties-' + selectorIndex%>" href="#<%='properties-' + selectorIndex%>"><%=properties[selector].name%></a>
+        </div>
+        <div id="<%='properties-' + selectorIndex%>" class="accordion-body collapse" data-selector="<%=selector%>">
+            <div class="accordion-inner">
+                <ul class="property-list">
+                    <% for (var propId in props){%>
+                        <li class="<%='prop-index-' + propId%>" data-prop="<%=props[propId]%>">
+                            <span><%=props[propId]%></span>
+                            <div class="lcePropValue"></div>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </div>
+<%
+    selectorIndex++;
+} %>
+</div>
