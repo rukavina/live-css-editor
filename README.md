@@ -25,6 +25,9 @@ You have to include this dependencies in your page (head):
 <!-- twitter bootstrap -->
 <link rel="stylesheet" type="text/css" href="plugins/bootstrap/css/bootstrap.min.css"  media="screen">
 <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+<!-- jquery ui -->
+<link rel="stylesheet" type="text/css" href="plugins/jquery-ui-1.9.1/css/smoothness/jquery-ui-1.9.1.custom.min.css"  media="screen">
+<script src="plugins/jquery-ui-1.9.1/js/jquery-ui-1.9.1.custom.min.js"></script>             
 ```
 
 In the page's body provide div where editor will be placed - give it enough space. Note: there cannot be 2 LCEs on a single page.
