@@ -200,7 +200,7 @@ for (var selector in properties){\
             self.loadPage($(this).val())
         });
         //set default editor
-        $.fn.Livecsseditor.setPropertyEditor('default', this.defaultEditorCallback);
+        $.fn.livecsseditor.setPropertyEditor('default', this.defaultEditorCallback);
     }
     
 
@@ -532,7 +532,7 @@ for (var selector in properties){\
      * @param {object} params
      * @return {jQuery}
      */
-    $.fn.Livecsseditor = function(options, params) {        
+    $.fn.livecsseditor = function(options, params) {        
         //just call existing instance
         if(options === 'getCss' || options === 'getJson' || options === 'setJson'){
             var customizer = $(this).data("Livecsseditor-instance");

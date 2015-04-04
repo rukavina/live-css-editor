@@ -206,6 +206,10 @@ Livecsseditor let you manage multiple pages from the same screen.
 
 In this example we have included custom position and size editors for in place, WYSIWYG editing. After standard installation you need to include these 2 editors:
 
+```html
+<script src="../source/livecsseditor/editors/lceSize.js"></script>
+<script src="../source/livecsseditor/editors/lcePosition.js"></script>
+```
 
 Options JSON has to include definition for this properties on proper elements:
 
