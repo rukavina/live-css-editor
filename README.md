@@ -13,125 +13,341 @@ http://rukavina.github.com/live-css-editor/demo
 You have to include this dependencies in your page (head):
 
 ```html
-<script src="js/jquery-1.7.1.min.js"></script>
-<script src="js/microtpl.js"></script>
-<!-- lce itself -->
-<script src="js/jquery.livecsseditor.js"></script>
-<link rel="stylesheet" type="text/css" href="css/livecsseditor.css">
-<script src="js/lce.editors.js"></script>
-<!-- colorpicker -->
-<link rel="stylesheet" media="screen" type="text/css" href="plugins/colorpicker/css/colorpicker-bootstrap.css"/>
-<script type="text/javascript" src="plugins/colorpicker/js/colorpicker-bootstrap.js"></script>
-<!-- twitter bootstrap -->
-<link rel="stylesheet" type="text/css" href="plugins/bootstrap/css/bootstrap.min.css"  media="screen">
-<script src="plugins/bootstrap/js/bootstrap.min.js"></script>
-<!-- jquery ui -->
-<link rel="stylesheet" type="text/css" href="plugins/jquery-ui-1.9.1/css/smoothness/jquery-ui-1.9.1.custom.min.css"  media="screen">
-<script src="plugins/jquery-ui-1.9.1/js/jquery-ui-1.9.1.custom.min.js"></script>             
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../dependencies/microtpl.js"></script>
+<script type="text/javascript" src="../dependencies/jscolor/jscolor.js"></script>
+<script type="text/javascript" src="../dependencies/chosen/chosen.jquery.min.js"></script>
+
+<!-- Editor -->
+<script src="../source/livecsseditor/livecsseditor-2.0.js"></script>
+<script src="../source/livecsseditor/editors/lceColor.js"></script>
+<script src="../source/livecsseditor/editors/lceFont.js"></script>
+<script src="../source/livecsseditor/editors/lceBackground.js"></script>            
 ```
 
 In the page's body provide div where editor will be placed - give it enough space. Note: there cannot be 2 LCEs on a single page.
 
 ```html
-<div id="lce"></div> 
+<div id="livecsseditor"></div> 
 ```
 
 Init LCE when document is ready, ex.
 
 ```javascript
-    $('#lce').livecsseditor({
+$(document).ready(function(){
+    $('#livecsseditor').livecsseditor({
         pages: {
-            'demo/index.html': {
-                name: 'Demo page',
+            'targets/simple.html': {
+                name: 'First Page',
                 def: {
                     'h1':{
                         name: 'Heading',
-                        props:['color','background-color']
+                        props:['color','background-color','font-family','font-weight','text-align'],
+                        labels: ['Color','Background color','Font','Font Weight','Align'],
+                        description: 'Update heading here',
+                        editorsConfig:{
+                            "font-family": {
+                                "names": ["Verdana","Arial", "Times New Roman"]
+                            }
+                        },
+                        iconClass: "glyphicon glyphicon-star"
                     },
                     'p,span':{
                         name: 'Text',
-                        props:['font-size','color']
-                    }            
-                }
-            },
-            'demo/second.html': {
-                name: 'Second page',
-                def: {
-                    'h2':{
-                        name: 'Heading 2',
-                        props:['color']
-                    },
-                    'em':{
-                        name: 'Text',
-                        props:['font-size']
-                    }            
+                        props:['font-size','color'],
+                        labels: ['Font size','Color'],
+                        editorsConfig:{
+                            "font-size": {
+                                "fixedValues": ["original","10px","11px","12px"]
+                            }
+                        },
+                        iconClass: "glyphicon glyphicon-font"
+                    }
                 }
             }
         }
-    });
+    });               
+});
 ```
 
-Options json has a list of pages with urls to be customized and json definition of selector/properties which can be altered in LCE.
+## Options
+            
 
-After customization is done, you would like to grab CSS:
+|option | description | default | possible values|
+|-------|-------------|---------|----------------|
+|**pages**|JSON definition of pages, styles and properties to be customized|null|Object|
+|**layout_tpl**|[Micro template](http://ejohn.org/blog/javascript-micro-templating/) layout|__default template__|String|
+|**props_tp**l|[Micro template](http://ejohn.org/blog/javascript-micro-templating/) property list layout|__default template__|String|
+|**hoverColor**|Background color or selected element in the live preview|#faf3ba|String|
+
+
+## Methods
+            
+### getCss( pagePath )
+
+Get customized css string for defined page `pagePath` or all pages
+
+Returns: **String**
+
+- **pagePath**, Type: String, Default: null
 
 ```javascript
-  $('#lce').livecsseditor('getCss',{pagePath:'demo/index.html'})
+$('.selector').livecsseditor('getCss','page.html');</pre>
 ```
 
-This will return css for just a page with provided path...but you could do
+* * *
+
+### getJson( pagePath )
+
+Get customized JSON Object for defined page `pagePath` or all pages
+
+Returns: **Object**
+
+- **pagePath**, Type: String, Default: null</li>
 
 ```javascript
-  $('#lce').livecsseditor('getCss');
+$('.selector').livecsseditor('getJson','page.html');</pre>
 ```
 
-and get single CSS string for all pages.
+* * *
 
-## Use Case
+### setJson( jsonObject )
 
-Possible use case could be backend of your website where you can provide admin ability to develop his own custom skin without CSS knowledge. In WYSIWYG fashion he will be able to customize look and feel by live previewing front-end pages during customization.
-Generated CSS could be stored in file/db and used by the frontend rendering engine to overwrite default css.
+Set JSON Object for customized prepared style
 
-## Custom property editors
-
-At the moment LCE comes with built in:
-* color picker for "color" and "background-color"
-* position ("left","top") draggable live feature for managing an element's position
-* size ("width","height") resizable live feature for managing an element's size
-* default, fallback generic editor for any other property
-
-Fortunately, there's an easy way to develop your own editors and attach it to LCE. Here's how specialized color editor is developed :
-
-* Create new .js file
-* write there something like:
+- **jsonObject**, Type: Object, Default: null
 
 ```javascript
-(function(){
-    //color
-    $.fn.livecsseditor.setPropertyEditor(['color','background-color'],function colorEditorCallback(options){
-        var html = '<form class="form-inline"><div class="input-append color" data-color="' + options.value + '" data-color-format="rgb"><input type="text" value="' + options.value + '" /><span class="add-on"><i style="background-color: ' + options.value + '"></i></span></div><a class="btn" href="#"><i class=" icon-ok"></i></a></form>';
-        options.container.html(html);
-        options.container.find('div.color').colorpicker();
-        options.container.find('a.btn').click(function(){
-            options.setValue(options.container.find('input').val());
-            return false; 
-        });        
-    });  
-    
-})();
-```
-
-Basically, you just call *$.fn.livecsseditor.setPropertyEditor* and provide callback which renders your property editor. *options* is an object:
-
-```javascript
-{
-    'container':valueContainer,//div container
-    'selector': propSelector,//css selector
-    'prop':prop,//property name
-    'value':props[propSelector].values[prop],//current value
-    'setValue':function(value){//set value callback
+$('.selector').livecsseditor('setJson',{
+    "page.html":{
+        "h1": {
+            "background-color": "#F9FF40",
+            "color": "#FA2B46"
+        }
     }
+});
+```
+
+## Examples
+
+* * *
+
+### Standard Setup
+
+[VIEW DEMO](demos/standard.html)
+
+Follow standard installation. Start livecsseditor when the document is ready.
+
+```javascript
+$('#livecsseditor').livecsseditor({
+    pages: {
+        'targets/simple.html': {
+            name: 'First Page',
+            def: {
+                'h1':{
+                    name: 'Heading',
+                    props:['color','background-color','font-family','font-weight','text-align'],
+                    labels: ['Color','Background color','Font','Font Weight','Align'],
+                    description: 'Update heading here',
+                    editorsConfig:{
+                        "font-family": {
+                            "names": ["Verdana","Arial", "Times New Roman"]
+                        }
+                    },
+                    iconClass: "glyphicon glyphicon-star"
+                },
+                'p,span':{
+                    name: 'Text',
+                    props:['font-size','color'],
+                    labels: ['Font size','Color'],
+                    editorsConfig:{
+                        "font-size": {
+                            "fixedValues": ["original","10px","11px","12px"]
+                        }
+                    },
+                    iconClass: "glyphicon glyphicon-font"
+                }
+            }
+        }
+    }
+});                
+```
+
+Options JSON has the following structure:
+
+*   **pages**
+    *   _page url_ URL to a page to be customized
+        *   **name** Descriptive page name
+        *   **def**
+            *   _element css selector_ CSS selector of a DOM element
+                *   **name** Descriptive element name
+                *   **props** Array of editable CSS properties
+                *   **labels** Array of descriptive names of editable properties
+                *   **description** Description of the current element
+                *   **iconClass** Optional element's icons css class
+                *   **editorsConfig** Optional properties for particular editors
+                    *   _property_ Value for each key is configuration for particular editor
+
+* * *
+
+### Multipage Setup
+
+[VIEW DEMO](demos/multipage.html)
+
+Livecsseditor let you manage multiple pages from the same screen.
+
+* * *
+
+### Size and Position Editors
+
+[VIEW DEMO](demos/size-position.html)
+
+In this example we have included custom position and size editors for in place, WYSIWYG editing. After standard installation you need to include these 2 editors:
+
+
+Options JSON has to include definition for this properties on proper elements:
+
+```javascript
+'div.resizable':{
+    name:'Resizable',
+    props:['width','height'],
+    iconClass: "glyphicon glyphicon-fullscreen"
+},
+'div.movable':{
+    name:'Movable',
+    props:['left','top'],
+    iconClass: "glyphicon glyphicon-fullscreen"
 }
+```
+
+Note that movable element needs to have absolute position in order to be draggable.
+
+* * *
+
+### Background image editor
+
+[VIEW DEMO](demos/bg-image.html)
+
+Selecting a background image for your elements is more of a backend task, thus you might want to create custom editor with integrated file manager or similar.
+
+Still, there's a simple built-in option. Basically, it's a simple select box with predefined options provided by you.
+
+```javascript
+'div.resizable':{
+    name:'BG Image',
+    props:['background-image'],
+    labels: ['Background Image'],
+    description: 'Choose BG Image',
+    editorsConfig:{
+        "background-image": {
+            "urls": ["images/bg1.jpg","images/bg2.jpg", "images/bg3.jpg"]
+        }
+    },
+    iconClass: "glyphicon glyphicon-fullscreen"
+}
+```
+* * *
+
+### API Interaction
+
+[VIEW DEMO](demos/api.html)
+
+livecsseditor has two methods`getCss` and`getJson` for you to store somewhere definition of made customization. On the hand,`setJson` provides a way to load styles from JSON object:
+
+Options JSON has to include definition for this properties on proper elements:
+
+```javascript
+//css button
+$('#cssBtn').click(function(){
+    alert($('#livecsseditor').livecsseditor('getCss','targets/complex.html'));
+});
+//json get button
+$('#jsonBtn').click(function(){
+    console.log($('#livecsseditor').livecsseditor('getJson','targets/complex.html'));
+});
+//json set button
+$('#jsonSetBtn').click(function(){
+    $('#livecsseditor').livecsseditor('setJson',{
+        "targets/complex.html":{
+            "h1": {
+                "background-color": "#F9FF40",
+                "color": "#FA2B46"
+            }
+        }
+    });
+});
+```
+* * *
+
+### Custom Editor
+
+[VIEW DEMO](demos/custom-editor.html)
+
+Whenever you are not satisfied with built-in editor or you need some custom editing logic, you can easily plug in your custom editing function.
+
+In this example we attached our custom color editor. Let's say we want our users to choose just red or green color, peace of cake:
+
+```javascript
+$.fn.livecsseditor.setPropertyEditor(['color','background-color'],
+    function customColorEditor(customizer, vars, config){
+        var $select = $('&lt;select class="form-control"&gt;&lt;/select&gt;'),
+            html = '',
+            options = {
+                "original": "",
+                "#FF0000": "Red",
+                "#00FF00": "Green"
+            };
+        vars.container.append($select);
+        for(var value in options){
+            var selected = '';
+            if (vars.value == value) {
+                selected = ' selected="selected"';
+            }
+            html += '&lt;option value="' + value + '"' + selected  + '"&gt;' + options[value] + '&lt;/option&gt;';
+        }
+        $select.html(html).change(function(){
+            vars.setValue($(this).val());
+        })                    
+});
+```
+
+We attached editor function using`$.fn.livecsseditor.setPropertyEditor`. Basically, we define in this call which properties we edit and callback function. During callback execution, livecsseditor provides 3 arguments:
+
+*   **customizer** - livecsseditor instance
+*   **vars** - running environment: value, setValue function, etc.
+*   **config** - editor local configuration
+
+* * *
+
+### Fixed values
+
+[VIEW DEMO](demos/fixed-values.html)
+
+Whenever you want to limit available options to predefined set, there's no need to create custom editor, you can just define property editor configuration:
+
+```javascript
+$('#livecsseditor').livecsseditor({
+    pages: {
+        'targets/complex.html': {
+            name: 'Complex page',
+            def: {
+                'h1':{
+                    name: 'Heading',
+                    props:['font-size'],
+                    labels: ['Font size'],
+                    editorsConfig:{
+                        "font-size": {
+                            "fixedValues": ["14px","15px", "16px"]
+                        }
+                    },
+                    iconClass: "glyphicon glyphicon-star"
+                }                                
+            }
+        }
+    }
+});
 ```
 
 ## Credits

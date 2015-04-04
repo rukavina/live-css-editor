@@ -1,0 +1,46 @@
+body{
+    background-color: #FFF;
+    color: #000;
+    font-family: arial, verdana;
+    font-size: 12px;
+}
+
+#wraper{
+    width: 500px;
+    margin: auto;
+    min-height: 500px;
+}
+
+h1{
+    color: #336699;
+    font-size: 14px;
+}
+
+p, span{
+    font-size: 12px;
+    border-color: #000;
+}
+
+div.movable{
+    position: absolute;
+    z-index: 10;
+    left: 100px;
+    top: 250px;
+    width: 300px;
+    height: 200px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #336699;
+}
+
+div.resizable{
+    position: absolute;
+    z-index: 10;
+    left: 460px;
+    top: 250px;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    vertical-align: middle;
+    background-image: url('../images/bg2.jpg');
+}

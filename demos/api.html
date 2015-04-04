@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Livecsseditor</title>
+
+        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.min.css">
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://bootswatch.com/cyborg/bootstrap.css">
+        <link rel="stylesheet" href="../source/livecsseditor/livecsseditor-2.0.css">
+        <link rel="stylesheet" href="../dependencies/chosen/chosen.min.css">
+    </head>
+    <body>
+        <div class="page-header">
+            <h1>Livecsseditor <small>API interaction</small></h1>
+            <button class="btn" id="cssBtn">Get custom CSS</button>
+            <button class="btn" id="jsonBtn">Get custom JSON</button>
+            <button class="btn" id="jsonSetBtn">Set custom JSON</button>
+        </div>        
+        <div class="container" id="livecsseditor"></div>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../dependencies/microtpl.js"></script>
+        <script type="text/javascript" src="../dependencies/jscolor/jscolor.js"></script>
+        <script type="text/javascript" src="../dependencies/chosen/chosen.jquery.min.js"></script>
+
+        <!-- Editor -->
+        <script src="../source/livecsseditor/livecsseditor-2.0.js"></script>
+        <script src="../source/livecsseditor/editors/lceColor.js"></script>
+        <script src="../source/livecsseditor/editors/lceFont.js"></script>
+        <script src="../source/livecsseditor/editors/lceBackground.js"></script>
+
+        <script src="../source/livecsseditor/editors/lceSize.js"></script>
+        <script src="../source/livecsseditor/editors/lcePosition.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#livecsseditor').livecsseditor({
+                    pages: {
+                        'targets/complex.html': {
+                            name: 'Complex page',
+                            def: {
+                                'h1':{
+                                    name: 'Heading',
+                                    props:['color','background-color','font-family','font-weight','text-align'],
+                                    labels: ['Color','Background color','Font','Font Weight','Align'],
+                                    description: 'Update heading here',
+                                    editorsConfig:{
+                                        "font-family": {
+                                            "names": ["Verdana","Arial", "Times New Roman"]
+                                        }
+                                    },
+                                    iconClass: "glyphicon glyphicon-star"
+                                },
+                                'p,span':{
+                                    name: 'Text',
+                                    props:['font-size','color'],
+                                    editorsConfig:{
+                                        "font-size": {
+                                            "fixedValues": ["10px","11px","12px"]
+                                        }
+                                    },
+                                    iconClass: "glyphicon glyphicon-font"
+                                },
+                                'div.resizable':{
+                                    name:'Resizable',
+                                    props:['width','height'],
+                                    iconClass: "glyphicon glyphicon-fullscreen"
+                                },
+                                'div.movable':{
+                                    name:'Movable',
+                                    props:['left','top'],
+                                    iconClass: "glyphicon glyphicon-fullscreen"
+                                }
+                            }
+                        }
+                    }
+                });
+
+                //css button
+                $('#cssBtn').click(function(){
+                    alert($('#livecsseditor').livecsseditor('getCss','targets/complex.html'));
+                });
+                //json get button
+                $('#jsonBtn').click(function(){
+                    console.log($('#livecsseditor').livecsseditor('getJson','targets/complex.html'));
+                });
+                //json set button
+                $('#jsonSetBtn').click(function(){
+                    $('#livecsseditor').livecsseditor('setJson',{
+                        "targets/complex.html":{
+                            "h1": {
+                                "background-color": "#F9FF40",
+                                "color": "#FA2B46"
+                            }
+                        }
+                    });
+                });
+                
+            });
+        </script>
+    </body>
+</html>
