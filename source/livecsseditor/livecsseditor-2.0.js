@@ -398,9 +398,9 @@ for (var selector in properties){\
             //mark selected selector
             self.$properties.find('.panel-collapse').on('show.bs.collapse', function () {                
                 var selected = self.$preview.contents().find($(this).data('selector'));
-                //if(!selected.data('orig-color')){
+                if(!selected.data('orig-color')){
                     selected.data('orig-color',selected.css('background-color'));
-                //}
+                }
 
                 selected.animate({'background-color':self.config.hoverColor},500,function(){
                     $(this).css('background-color',selected.data('orig-color'));
