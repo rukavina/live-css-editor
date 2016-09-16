@@ -386,7 +386,8 @@ for (var selector in properties){\
                         $(this).css('background-color',$(this).data('orig-color'));
                     }
                 )
-                .click(function(){
+                .click(function(e){
+                    e.stopPropagation();
                     //self.$properties.find('.panel-collapse').collapse('hide');
                     var $properties = self.$properties.find('#properties-' + $(this).data('selectorIndex'));
                     if(!$properties.hasClass('in')){
