@@ -47,6 +47,10 @@
     $.fn.livecsseditor.setPropertyEditor(['color','background-color'],function colorEditorCallback(customizer, vars, config){
         var html = '<input type="text" class="form-control" value="" />';
         vars.container.html(html);
+        // Checks if value exists
+        if(typeof vars.value == 'undefined'){
+        	vars.value = 'rgba(0,0,0,0)';
+        }
         //convert to hex
         if(vars.value.substr(0, 1) == '#'){
             var hexValue = vars.value.substr(1);
