@@ -6,7 +6,7 @@
  * @version 2.0
  */
 
-(function(){       
+;(function($){
     //size editor attach
     $.fn.livecsseditor.setPropertyEditor(['width','height'],function sizeEditorCallback(customizer, vars, config){
         customizer.defaultEditorCallback(customizer, vars, config);
@@ -34,5 +34,4 @@
         });     
     });
     
-})();
-
+})(jQuery);
