@@ -11,7 +11,11 @@
     //attach font editor
     $.fn.livecsseditor.setPropertyEditor(['font-family'],function fontFamilyEditorCallback(customizer, vars, config){
         var fonts = config.names;
-        var fontNames = vars.value.split(",");
+        if(typeof vars.value == 'undefined'){
+        	var fontNames = [];
+        }else{
+        	var fontNames = vars.value.split(",");
+        }
         for(var i in fontNames){
             fontNames[i] = $.trim(fontNames[i]).toLowerCase();
         }
