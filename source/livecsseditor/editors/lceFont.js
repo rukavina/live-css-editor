@@ -6,7 +6,7 @@
  * @version 2.0
  */
 
-(function(){
+;(function($){
 
     //attach font editor
     $.fn.livecsseditor.setPropertyEditor(['font-family'],function fontFamilyEditorCallback(customizer, vars, config){
@@ -57,5 +57,4 @@
                     vars.container.parents('.panel').css('overflow','visible');
                 });
     });    
-})();
-
+})(jQuery);
