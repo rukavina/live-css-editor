@@ -6,7 +6,7 @@
  * @version 2.0
  */
 
-(function(){       
+;(function($){ 
     //position editor attach
     $.fn.livecsseditor.setPropertyEditor(['left','top'],function positionEditorCallback(customizer, vars, config){
         customizer.defaultEditorCallback(customizer, vars, config);        
@@ -33,5 +33,4 @@
             vars.setValue(value);
         });      
     });    
-})();
-
+})(jQuery);
