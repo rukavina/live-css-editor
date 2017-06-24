@@ -6,7 +6,7 @@
  * @version 2.0
  */
 
-(function(){
+;(function($){
 
     //attach image chooser
     $.fn.livecsseditor.setPropertyEditor(['background-image'],function bgImageEditorCallback(customizer, vars, config){
@@ -36,5 +36,4 @@
                 });
     });
     
-})();
-
+})(jQuery);
