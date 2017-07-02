@@ -375,9 +375,9 @@ for (var selector in properties){\
                 .css('cursor','pointer')
                 .hover(
                     function() {
-                        if(!$(this).data('orig-color')){
+                        //if(!$(this).data('orig-color')){
                             $(this).data('orig-color',$(this).css('background-color'));
-                        }
+                        //}
                         $(this).css('background-color',self.config.hoverColor);
                         //self.$properties.find('.panel-collapse').removeClass('in');
                         //self.$properties.find('#properties-' + $(this).data('selectorIndex')).addClass('in');
@@ -386,7 +386,8 @@ for (var selector in properties){\
                         $(this).css('background-color',$(this).data('orig-color'));
                     }
                 )
-                .click(function(){
+                .click(function(e){
+                    e.stopPropagation();
                     //self.$properties.find('.panel-collapse').collapse('hide');
                     var $properties = self.$properties.find('#properties-' + $(this).data('selectorIndex'));
                     if(!$properties.hasClass('in')){
